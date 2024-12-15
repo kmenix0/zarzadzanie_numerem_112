@@ -7,8 +7,17 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
+    private static class Write {
+        private static void inOrder(String Text) throws InterruptedException {
+            for(int i = 0; i < Text.length(); i++) {
+                System.out.print(Text.charAt(i));
+                TimeUnit.MILLISECONDS.sleep(100);
+            }
+            System.out.println(" ");
+        }
+    }
+
     public static void main(String[] args) throws InterruptedException {
-        boolean isOnDuty = true;
         String isReportPlural;
         String[][][] reports = new String[6][2][];
         reports[0][0] = new String[] {"Straż Pożarna"};
@@ -30,8 +39,9 @@ public class Main {
         reports[5][1] = new String[] {"Doszło do wypadku, na drodze powiatowej nr 72. Jeden samochód leży na boku, w drugim jest nieprzytomny mężczyzna", "Wypadek z dużymi uszkodzeniami, w okolicy czuję spaleniznę"};
 
         List<String> reporters = Arrays.asList(
-                "Jan Kowalski", "Michał Nowak", "Piotr Wiśniewski", "Andrzej Lewandowski", "Tomasz Zieliński",
-                "Adam Wójcik", "Krzysztof Szymański", "Paweł Kwiatkowski", "Łukasz Jabłoński", "Mateusz Dąbrowski"
+                "Jan Kowalski", "Michał Nowak", "Klaudia Wiśniewska", "Andrzej Lewandowski", "Tomasz Zieliński",
+                "Alicja Wójcik", "Krzysztof Szymański", "Paweł Kwiatkowski", "Łukasz Jabłoński", "Wiktoria Dąbrowska",
+                "Kacper Mazurek", "Bogdan Limanowski", "Emilia Kaluga", "Jakub Rajewski", "Kamila Pieczonka"
         );
         List<String> locations = Arrays.asList(
                 "Na wysokości ulicy Sudeckiej 40", "Skrzyżowanie Jaracza i Kołątaja", "Obok teatru na Szpitalnej",
@@ -42,7 +52,7 @@ public class Main {
 
         int operatorBadge = myMath.random(1,50);
 
-        while(isOnDuty) {
+        while(true) {
             TimeUnit.SECONDS.sleep(myMath.random(5,10));
             int whichReport = myMath.random(0, reports.length);
 
@@ -55,9 +65,9 @@ public class Main {
 
             if(phoneDecision.equals("Odbieram")) {
                 TimeUnit.SECONDS.sleep(1);
-                System.out.println("Operator: Operator " + operatorBadge + ", w czym mogę pomóc?");
+                Write.inOrder("Operator: Operator " + operatorBadge + ", w czym mogę pomóc?");
                 TimeUnit.SECONDS.sleep(1);
-                System.out.println("Zgłaszający: " + reports[whichReport][1][myMath.random(0,reports[whichReport][1].length)]);
+                Write.inOrder("Zgłaszający: " + reports[whichReport][1][myMath.random(0,reports[whichReport][1].length)]);
                 TimeUnit.SECONDS.sleep(1);
                 System.out.println("   [1] Lokalizacja miejsca zdarzenia");
                 System.out.println("   [2] Imię i nazwisko zgłaszającego");
@@ -66,14 +76,14 @@ public class Main {
                 TimeUnit.SECONDS.sleep(1);
                 switch(whichQuestion) {
                     case "1":
-                        System.out.println("Operator: Gdzie to się dzieje?");
+                        Write.inOrder("Operator: Gdzie to się dzieje?");
                         TimeUnit.SECONDS.sleep(1);
-                        System.out.println("Zgłaszający: " + locations.get(myMath.random(0, locations.size())));
+                        Write.inOrder("Zgłaszający: " + locations.get(myMath.random(0, locations.size())));
                         break;
                     default:
-                        System.out.println("Operator: Proszę podać swoję imię i nazwisko");
+                        Write.inOrder("Operator: Proszę podać swoję imię i nazwisko");
                         TimeUnit.SECONDS.sleep(1);
-                        System.out.println("Zgłaszający: " + reporters.get(myMath.random(0, reporters.size())));
+                        Write.inOrder("Zgłaszający: " + reporters.get(myMath.random(0, reporters.size())));
                 }
                 TimeUnit.SECONDS.sleep(1);
                 if(whichQuestion.equals("1")) {
@@ -86,14 +96,14 @@ public class Main {
                 TimeUnit.SECONDS.sleep(1);
                 switch(whichQuestion2) {
                     case "1":
-                        System.out.println("Operator: Gdzie to się dzieje?");
+                        Write.inOrder("Operator: Gdzie to się dzieje?");
                         TimeUnit.SECONDS.sleep(1);
-                        System.out.println("Zgłaszający: " + locations.get(myMath.random(0, locations.size())));
+                        Write.inOrder("Zgłaszający: " + locations.get(myMath.random(0, locations.size())));
                         break;
                     default:
-                        System.out.println("Operator: Proszę podać swoję imię i nazwisko");
+                        Write.inOrder("Operator: Proszę podać swoję imię i nazwisko");
                         TimeUnit.SECONDS.sleep(1);
-                        System.out.println("Zgłaszający: " + reporters.get(myMath.random(0, reporters.size())));
+                        Write.inOrder("Zgłaszający: " + reporters.get(myMath.random(0, reporters.size())));
                 }
                 TimeUnit.SECONDS.sleep(1);
                 if(whichReport>=3) {
@@ -101,7 +111,7 @@ public class Main {
                 } else {
                     isReportPlural = "jest";
                 }
-                System.out.println("Dziękuje, " + reports[whichReport][0][0] + " " + isReportPlural + " w drodze!");
+                Write.inOrder("Dziękuje, " + reports[whichReport][0][0] + " " + isReportPlural + " w drodze!");
                 System.out.println("..........");
                 TimeUnit.SECONDS.sleep(10);
             } else if(phoneDecision.equals("Rozłączam")) {
